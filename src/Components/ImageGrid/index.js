@@ -25,7 +25,7 @@ const ImageGrid = ({ n }) => {
         display: 'grid',
         gridTemplateColumns: `repeat(${n}, 100px)`, // Adjust the size as needed
         gridTemplateRows: `repeat(${n}, 100px)`, // Adjust the size as needed
-        gap: '5px',
+        gap: '12px',
       }}
     >
       {grid.map((row, rowIndex) =>
