@@ -1,16 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ImageGrid = ({ n, actualGrid }) => {
   // Create a 2D array to manage the state of each cell
   const [grid, setGrid] = useState(Array(n*n).fill(null));
-
+  const [numberOfClicks, setNumberOfClicks] = useState(0);
+  const [last2Index, setLast2Index] = useState([]);
+  console.log("numberofclicks", numberOfClicks)
   // Function to handle the click event
   const handleClick = (index) => {
-    // Create a new grid with the clicked cell updated to show an image
+    if(numberOfClicks === 2) return    
     const tempGrid = [...grid]
+    const tempLast2Index = [...last2Index]
+    tempLast2Index.push(index)
     tempGrid[index] = actualGrid[index]
     setGrid(tempGrid)
+    setLast2Index(tempLast2Index)
+    setNumberOfClicks((prev) => prev+1)
   };
+
+  useEffect(() => {
+    if(numberOfClicks === 2) {
+      setTimeout(()=>{
+        if(actualGrid[last2Index[0]] === actualGrid[last2Index[1]]) {
+          setNumberOfClicks(0)
+          setLast2Index([])
+        } else {
+          const tempGrid = [...grid]
+          tempGrid[last2Index[0]] = null
+          tempGrid[last2Index[1]] = null
+          setGrid(tempGrid)
+          setNumberOfClicks(0)
+          setLast2Index([])
+        }
+      }, 1000)
+    }
+  }, [numberOfClicks])
 
   return (
     <div
