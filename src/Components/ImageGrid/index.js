@@ -1,41 +1,33 @@
 import React, { useState } from 'react';
 
-const ImageGrid = ({ n }) => {
+const ImageGrid = ({ n, actualGrid }) => {
   // Create a 2D array to manage the state of each cell
-  const [grid, setGrid] = useState(
-    Array.from({ length: n }, () => Array(n).fill(null))
-  );
+  const [grid, setGrid] = useState(Array(n*n).fill(null));
 
   // Function to handle the click event
-  const handleClick = (row, col) => {
+  const handleClick = (index) => {
     // Create a new grid with the clicked cell updated to show an image
-    const newGrid = grid.map((rowArr, rowIndex) =>
-      rowArr.map((cell, colIndex) =>
-        rowIndex === row && colIndex === col
-          ? 'https://via.placeholder.com/100' // Replace with your image URL
-          : cell
-      )
-    );
-    setGrid(newGrid);
+    const tempGrid = [...grid]
+    tempGrid[index] = actualGrid[index]
+    setGrid(tempGrid)
   };
 
   return (
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(${n}, 100px)`, // Adjust the size as needed
-        gridTemplateRows: `repeat(${n}, 100px)`, // Adjust the size as needed
+        gridTemplateColumns: `repeat(${n}, 150px)`,
+        gridTemplateRows: `repeat(${n}, 150px)`,
         gap: '12px',
       }}
     >
-      {grid.map((row, rowIndex) =>
-        row.map((cell, colIndex) => (
+      {grid.map((cell, rowIndex) =>
           <div
-            key={`${rowIndex}-${colIndex}`}
-            onClick={() => handleClick(rowIndex, colIndex)}
+            key={`${rowIndex}`}
+            onClick={() => handleClick(rowIndex)}
             style={{
-              width: '100px',
-              height: '100px',
+              width: '150px',
+              height: '150px',
               border: '1px solid black',
               display: 'flex',
               alignItems: 'center',
@@ -45,7 +37,6 @@ const ImageGrid = ({ n }) => {
           >
             {!cell && 'Click'}
           </div>
-        ))
       )}
     </div>
   );
