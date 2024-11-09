@@ -3,7 +3,7 @@ import './App.css';
 import ImageGrid from './Components/ImageGrid';
 
 function App() {
-  const [blockCount, setBlockCount] = useState(3);
+  const [blockCount, setBlockCount] = useState(4);
   return (
     <div className='main-container'>
       <h2>Memory Game</h2>
