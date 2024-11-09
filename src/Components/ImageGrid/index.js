@@ -5,7 +5,6 @@ const ImageGrid = ({ n, actualGrid }) => {
   const [grid, setGrid] = useState(Array(n*n).fill(null));
   const [numberOfClicks, setNumberOfClicks] = useState(0);
   const [last2Index, setLast2Index] = useState([]);
-  console.log("numberofclicks", numberOfClicks)
   // Function to handle the click event
   const handleClick = (index) => {
     if(numberOfClicks === 2) return    
@@ -40,8 +39,8 @@ const ImageGrid = ({ n, actualGrid }) => {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(${n}, 150px)`,
-        gridTemplateRows: `repeat(${n}, 150px)`,
+        gridTemplateColumns: `repeat(${n}, 10.5vw)`,
+        gridTemplateRows: `repeat(${n}, 10.5vw)`,
         gap: '12px',
       }}
     >
@@ -50,8 +49,9 @@ const ImageGrid = ({ n, actualGrid }) => {
             key={`${rowIndex}`}
             onClick={() => handleClick(rowIndex)}
             style={{
-              width: '150px',
-              height: '150px',
+              cursor: 'pointer',
+              width: '10.5vw',
+              height: '10.5vw',
               border: '1px solid black',
               display: 'flex',
               alignItems: 'center',

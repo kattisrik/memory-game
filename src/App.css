@@ -3,6 +3,6 @@
   text-align: center;
 }
 .block-container {
-  margin-top: 50px;
-  margin-left: 30%;
+  display: flex;
+  justify-content: center;
 }
