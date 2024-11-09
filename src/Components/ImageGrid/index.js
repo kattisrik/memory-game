@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const ImageGrid = ({ n, actualGrid }) => {
   // Create a 2D array to manage the state of each cell
+  console.log("n", n)
   const [grid, setGrid] = useState(Array(n*n).fill(null));
   const [numberOfClicks, setNumberOfClicks] = useState(0);
   const [last2Index, setLast2Index] = useState([]);
@@ -16,7 +17,13 @@ const ImageGrid = ({ n, actualGrid }) => {
     setLast2Index(tempLast2Index)
     setNumberOfClicks((prev) => prev+1)
   };
-
+  console.log("grid", grid)
+  useEffect(() => {
+    // Reset the grid whenever 'n' changes
+    setGrid(Array(n * n).fill(null));
+    setNumberOfClicks(0);
+    setLast2Index([]);
+  }, [n]);
   useEffect(() => {
     if(numberOfClicks === 2) {
       setTimeout(()=>{
@@ -39,8 +46,8 @@ const ImageGrid = ({ n, actualGrid }) => {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(${n}, 10.5vw)`,
-        gridTemplateRows: `repeat(${n}, 10.5vw)`,
+        gridTemplateColumns: `repeat(${n}, 10vw)`,
+        gridTemplateRows: `repeat(${n}, 10vw)`,
         gap: '12px',
       }}
     >
@@ -50,8 +57,8 @@ const ImageGrid = ({ n, actualGrid }) => {
             onClick={() => handleClick(rowIndex)}
             style={{
               cursor: 'pointer',
-              width: '10.5vw',
-              height: '10.5vw',
+              width: '10vw',
+              height: '10vw',
               border: '1px solid black',
               display: 'flex',
               alignItems: 'center',
