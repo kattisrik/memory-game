@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 const ImageGrid = ({ n, actualGrid }) => {
   // Create a 2D array to manage the state of each cell
-  console.log("n", n)
   const [grid, setGrid] = useState(Array(n*n).fill(null));
   const [numberOfClicks, setNumberOfClicks] = useState(0);
   const [last2Index, setLast2Index] = useState([]);
@@ -17,12 +16,12 @@ const ImageGrid = ({ n, actualGrid }) => {
     setLast2Index(tempLast2Index)
     setNumberOfClicks((prev) => prev+1)
   };
-  console.log("grid", grid)
   useEffect(() => {
     // Reset the grid whenever 'n' changes
     setGrid(Array(n * n).fill(null));
     setNumberOfClicks(0);
     setLast2Index([]);
+    // eslint-disable-next-line
   }, [n]);
   useEffect(() => {
     if(numberOfClicks === 2) {
@@ -40,6 +39,7 @@ const ImageGrid = ({ n, actualGrid }) => {
         }
       }, 1000)
     }
+    // eslint-disable-next-line
   }, [numberOfClicks])
 
   return (
